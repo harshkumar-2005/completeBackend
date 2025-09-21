@@ -29,6 +29,22 @@ app.get('/posts/:id', (req, res) => {
     res.status(200).send(post);
 });
 
+// POST a new post
+app.post('/posts', (req, res) => {
+    const { title, content } = req.body;
+    if (!title || !content) {
+        return res.status(400).send({ "message": "Post must include a title and content." });
+    }
+
+    const newPost = {
+        id: nextId++,
+        title,
+        content
+    };
+    posts.push(newPost);
+    res.status(201).send(newPost);
+});
+
 app.listen(port, () => {
     console.log(`App is running at http://localhost:${port}`);
 });

@@ -13,7 +13,7 @@ Endpoints:
 
 ✅ GET /posts/:id: Retrieve a single blog post by its ID.
 
-POST /posts: Create a new blog post. The request body should include a title and content.
+✅ POST /posts: Create a new blog post. The request body should include a title and content.
 
 PUT /posts/:id: Update an existing blog post. The request body can contain a new title or new content.
 
