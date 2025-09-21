@@ -1,0 +1,16 @@
+{
+  "name": "assignment-01",
+  "version": "1.0.0",
+  "description": "Basic: Simple Blog API\r This first assignment focuses on CRUD (Create, Read, Update, Delete) operations, which are fundamental to most web applications. You'll build the backend for a simple blog without a frontend, focusing on handling HTTP requests and managing data.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
