@@ -45,6 +45,39 @@ app.post('/posts', (req, res) => {
     res.status(201).send(newPost);
 });
 
+// PUT to update a post
+app.put('/posts/:id', (req, res) => {
+    const id = parseInt(req.params.id, 10);
+    const post = posts.find(p => p.id === id);
+
+    if (!post) {
+        return res.status(404).send({ "message": "Post not found." });
+    }
+
+    const { title, content } = req.body;
+    if (title) {
+        post.title = title;
+    }
+    if (content) {
+        post.content = content;
+    }
+
+    res.status(200).send({ "message": "Your post has been updated", "post": post });
+});
+
+// DELETE a post
+app.delete('/posts/:id', (req, res) => {
+    const id = parseInt(req.params.id, 10);
+    const initialLength = posts.length;
+    posts = posts.filter(post => post.id !== id);
+
+    if (posts.length === initialLength) {
+        return res.status(404).send({ "message": "Post not found." });
+    }
+
+    res.status(200).send({ "message": "Post deleted successfully." });
+});
+
 app.listen(port, () => {
     console.log(`App is running at http://localhost:${port}`);
 });

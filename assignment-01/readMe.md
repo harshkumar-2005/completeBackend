@@ -15,8 +15,8 @@ Endpoints:
 
 ✅ POST /posts: Create a new blog post. The request body should include a title and content.
 
-PUT /posts/:id: Update an existing blog post. The request body can contain a new title or new content.
+✅ PUT /posts/:id: Update an existing blog post. The request body can contain a new title or new content.
 
-DELETE /posts/:id: Delete a specific blog post.
+✅ DELETE /posts/:id: Delete a specific blog post.
 
 Validation: Handle cases where a post ID doesn't exist, and return an appropriate status code (e.g., 404 Not Found) with a clear message.
