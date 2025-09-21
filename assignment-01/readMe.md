@@ -11,7 +11,7 @@ Endpoints:
 
 ✅ GET /posts: Retrieve all blog posts.
 
-GET /posts/:id: Retrieve a single blog post by its ID.
+✅ GET /posts/:id: Retrieve a single blog post by its ID.
 
 POST /posts: Create a new blog post. The request body should include a title and content.
 
