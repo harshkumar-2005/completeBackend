@@ -18,6 +18,17 @@ app.get('/posts', (req, res) => {
     res.status(200).send(posts);
 });
 
+// GET a single post by ID
+app.get('/posts/:id', (req, res) => {
+    const id = parseInt(req.params.id, 10);
+    const post = posts.find(p => p.id === id);
+
+    if (!post) {
+        return res.status(404).send({ "message": "Post not found" });
+    }
+    res.status(200).send(post);
+});
+
 app.listen(port, () => {
     console.log(`App is running at http://localhost:${port}`);
 });
