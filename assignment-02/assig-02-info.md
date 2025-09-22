@@ -3,7 +3,8 @@ Assignment 2: User Authentication & To-Do List API
 Database: MongoDB with mongoose
 
 User Authentication:
-Registration A user can sign up with a unique username and a password.Use bcrypt to hash and salt the user's password before saving it to the database
+
+✅ Registration A user can sign up with a unique username and a password.Use bcrypt to hash and salt the user's password before saving it to the database
 
 Login 
 A user can log in with their username and password.JWT Generation: If the credentials are correct, generate a JSON Web Token (JWT).Send the JWT back in the response.
