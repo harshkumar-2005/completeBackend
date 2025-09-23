@@ -10,6 +10,8 @@ dotenv.config(); // load .env variables
 
 const port = process.env.PORT
 
+const jwt_secert = process.env.JWT_SECERT;
+
 const app = express();
 
 app.use(express.json());
@@ -46,6 +48,41 @@ app.post('/signup', async (req, res) => {
         res.status(500).send({ message: "Error saving user to the database" });
     }
 });
+
+app.post('/login', async (req, res) => {
+    const { username, password } = req.body; 
+
+    if (!username || !password) {
+        return res.status(400).json({ message: "Username and password are required" });
+    }
+
+    try {
+        const existingUser = await user.findOne({ username });
+        if (!existingUser) {
+            return res.status(401).json({ message: "Invalid username or password" });
+        }
+
+        const isMatch = await verifyPassword(password, existingUser.password);
+        if (!isMatch) {
+            return res.status(401).json({ message: "Invalid username or password" });
+        }
+
+        const token = jwt.sign(
+            { id: existingUser._id, username: existingUser.username },
+            jwt_secert,
+            { expiresIn: '1h' }
+        );
+
+        res.status(200).json({ 
+            message: "Login successful",
+            token
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Server error" });
+    }
+});
+
 
 
 
