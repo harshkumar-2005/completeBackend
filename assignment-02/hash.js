@@ -6,5 +6,9 @@ async function hashPassword(password) {
     return hashedPassword;
 }
 
+async function verifyPassword(plainPassword, storedHash) {
+    const match = await bcrypt.compare(plainPassword, storedHash);
+    return match;
+}
 
-module.exports = { hashPassword };
+module.exports = { hashPassword, verifyPassword };
