@@ -85,15 +85,30 @@ app.post('/login', async (req, res) => {
 });
 
 app.get('/todos', check, async (req, res) => {
-  try {
-    const todos = await todo.find({ userId: req.user.id });
-    res.json(todos);
-  } catch (err) {
-    console.error("Error fetching todos:", err);
-    res.status(500).json({ message: "Server error" });
-  }
+    try {
+        const todos = await todo.find({ userId: req.user.id });
+        res.json(todos);
+    } catch (err) {
+        console.error("Error fetching todos:", err);
+        res.status(500).json({ message: "Server error" });
+    }
 });
 
+app.post('/todos', check, async (req, res) => {
+    try {
+        const newTodo = new todo({
+            todo: req.body.todo,
+            userId: req.user.id,
+        });
+
+        await newTodo.save();
+
+        res.status(201).json({ message: "Todo added successfully", todo: newTodo });
+    } catch (err) {
+        console.error("Error creating todo:", err);
+        res.status(500).json({ message: "Error saving todo" });
+    }
+});
 
 
 app.listen(port, () => {
