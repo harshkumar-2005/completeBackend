@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 const { hashPassword, verifyPassword } = require('./hash')
 const { user, todo } = require('./db');
+const { check } = require('./middlewares');
 
 dotenv.config(); // load .env variables
 
@@ -50,7 +51,7 @@ app.post('/signup', async (req, res) => {
 });
 
 app.post('/login', async (req, res) => {
-    const { username, password } = req.body; 
+    const { username, password } = req.body;
 
     if (!username || !password) {
         return res.status(400).json({ message: "Username and password are required" });
@@ -73,7 +74,7 @@ app.post('/login', async (req, res) => {
             { expiresIn: '1h' }
         );
 
-        res.status(200).json({ 
+        res.status(200).json({
             message: "Login successful",
             token
         });
@@ -83,6 +84,15 @@ app.post('/login', async (req, res) => {
     }
 });
 
+app.get('/todos', check, async (req, res) => {
+  try {
+    const todos = await todo.find({ userId: req.user.id });
+    res.json(todos);
+  } catch (err) {
+    console.error("Error fetching todos:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
 
 
 

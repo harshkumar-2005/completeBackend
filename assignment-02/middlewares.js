@@ -11,14 +11,13 @@ function check(req, res, next) {
     ? authHeader.split(" ")[1]
     : authHeader;
 
-  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-    if (err) {
-      return res.status(403).json({ message: "Invalid or expired token" });
-    }
-    // attach the decoded user data to req for later use
-    req.user = user;
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECERT); 
+    req.user = decoded; 
     next();
-  });
+  } catch (err) {
+    return res.status(403).json({ message: "Invalid or expired token" });
+  }
 }
 
-module.exports = check;
+module.exports = { check };
