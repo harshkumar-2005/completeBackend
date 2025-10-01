@@ -16,6 +16,6 @@ All to-do list operations must be protected. A user can only access these routes
 
 ✅ POST /todos: Create a new to-do item for the authenticated user. The request body should include the to-do item's content.
 
-PUT /todos/:id: Update a specific to-do item for the authenticated user. A user can only update their own items.
+✅ PUT /todos/:id: Update a specific to-do item for the authenticated user. A user can only update their own items.
 
 DELETE /todos/:id: Delete a specific to-do item for the authenticated user. A user can only delete their own items.
