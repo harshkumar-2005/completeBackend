@@ -110,6 +110,38 @@ app.post('/todos', check, async (req, res) => {
     }
 });
 
+app.put("/todos/:id", check, async (req, res) => {
+  try {
+    const todoId = req.params.id;
+    const userId = req.user.userId;
+    const { todo } = req.body;
+
+    if (!todo || todo.trim() === "") {
+      return res.status(400).json({ message: "Todo content cannot be empty." });
+    }
+
+    // Find and update the todo
+    const updatedTodo = await todo.findOneAndUpdate(
+      { _id: todoId, userId: userId },
+      { todo: todo },
+      { new: true } 
+    );
+
+    if (!updatedTodo) {
+      return res.status(404).json({
+        message: "To-do item not found or you don't have permission to update it.",
+      });
+    }
+
+    res.status(200).json({
+      message: "To-do item updated successfully.",
+      todo: updatedTodo,
+    });
+  } catch (error) {
+    console.error("Error updating todo:", error);
+    res.status(500).json({ message: "Server error." });
+  }
+});
 
 app.listen(port, () => {
     console.log(`app is running at http://localhost:${port}`);
