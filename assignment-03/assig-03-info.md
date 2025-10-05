@@ -19,21 +19,21 @@ Endpoints:
 
 Post Endpoints:
 
-POST /posts: Create a new post.
+✅ POST /posts: Create a new post.
 
-GET /posts: Retrieve all posts. Posts should be sorted by creation date (newest first).
+✅ GET /posts: Retrieve all posts. Posts should be sorted by creation date (newest first).
 
-GET /posts/:id: Retrieve a single post by its ID. It should also include its associated comments.
+✅ GET /posts/:id: Retrieve a single post by its ID. It should also include its associated comments.
 
-PUT /posts/:id: Update a post. Only the post's creator can update it.
+✅ PUT /posts/:id: Update a post. Only the post's creator can update it.
 
-DELETE /posts/:id: Delete a post. Only the post's creator can delete it.
+✅ DELETE /posts/:id: Delete a post. Only the post's creator can delete it.
 
 Comment Endpoints:
 
-POST /posts/:id/comments: Add a comment to a specific post.
+✅ POST /posts/:id/comments: Add a comment to a specific post.
 
-DELETE /comments/:id: Delete a comment. Only the comment's creator can delete it.
+✅ DELETE /comments/:id: Delete a comment. Only the comment's creator can delete it.
 
 Like Endpoints:
 
