@@ -3,11 +3,11 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
-const postRouter = require('./routes/posts');
 const { User, Post, Comment } = require('./db');
+const postRouter = require('./routers/posts');
+const commentRouter = require('./routers/comments')
 
 dotenv.config();
-
 
 async function connect() {
     try {
@@ -24,7 +24,13 @@ const port = process.env.PORT;
 
 app.use(express.json());
 
+// posts routes goes here.
 app.use('/posts', postRouter);
+
+// comment routes goes here.
+app.use('/comments', commentRouter);
+
+// Like endpoints goes here.
 
 app.get('/', (req, res) => {
     res.send("Welcome to the backend of the gramify.");
